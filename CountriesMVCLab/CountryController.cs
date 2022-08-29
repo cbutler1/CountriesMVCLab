@@ -33,28 +33,26 @@ namespace CountriesMVCLab
 
         public void CountryAction(Country c)
         {
-            //dont understand where c comes from or how to use it
+         
             var countryView = new CountryView(c);
             countryView.Display();
         }
         public void WelcomeAction()
         {
-            var listView = new CountryListView(CountryDb);
-            Console.WriteLine("Hello, welcome to the country app.  Please select a country from the following list:");
-            listView.Display();
-            Console.WriteLine("Please select a country by using the associated number.");
-            int selection = int.Parse(Console.ReadLine());
-            var countrySelection = new CountryView(CountryDb[selection - 1]);
-            CountryAction();
-
-            //really struggling to figure out how to make WelcomeAction and CountryAction talk together
-
-            
-            
-            
-            
-
-            Console.WriteLine("Would you like to learn about another country? y/n");
+            string nextChoice = "y";
+            while (nextChoice == "y")
+            {
+                var listView = new CountryListView(CountryDb);
+                Console.WriteLine("Hello, welcome to the country app.  Please select a country from the following list:");
+                listView.Display();
+                Console.WriteLine("Please select a country by using the associated number.");
+                int selection = int.Parse(Console.ReadLine());
+                Console.Clear();
+                CountryAction(CountryDb[selection - 1]);
+                Console.WriteLine("Would you like to learn about another country? y/n");
+                nextChoice = Console.ReadLine().ToLower();
+                Console.Clear();
+            }
         }
 
        
